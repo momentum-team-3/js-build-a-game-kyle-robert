@@ -11,6 +11,7 @@ const Keyboarder = {
     })
   }
 }
+const key = 23
 
 window.addEventListener('keydown', function (e) {
   Keyboarder.keyState[e.keyCode] = true
