@@ -79,4 +79,6 @@ function drawFrame () {
 
 window.addEventListener('keydown', keyPresslistener)
 
+document.querySelector("#start-button").addEventListener("click", () => animationID = window.setInterval(drawFrame,20))
+
 let animationID = window.setInterval(drawFrame, 50)
