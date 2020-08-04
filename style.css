@@ -23,6 +23,5 @@ main > * {
 }
 
 #canvas {
-  background-image: url(/Users/heheking/Documents/Homework/js-build-a-game-kyle-robert/PixelSpaceRage/PixelBackgroundSeamlessVertically.png);
-  background-color: rgb(73, 12, 12);
+  background-image: url(PixelSpaceRage/PixelBackgroundSeamlessVertically.png);
 }
