@@ -2,11 +2,11 @@
 // The document's canvas element
 const canv = document.querySelector('#canvas')
 // small helper for getting a new context
-const getctx = () => canv.getContext('2d')
 document.body.appendChild(canv)
 const HEIGHT = canv.height
 const WIDTH = canv.width
 const CHARTREUSE = 'rgb(127,255,0)'
+let animationID
 var playerAlive = true
 
 function createPlayer (x, y, height, width, color, isPlayer) {
@@ -24,18 +24,7 @@ function createPlayer (x, y, height, width, color, isPlayer) {
   }
 }
 
-const player = createPlayer(250, 950, 100, 200, CHARTREUSE, true)
-
-// function createPlayer (x, y, playerWidth, isPlayer) {
-//   const player = {
-//     X: x,
-//     Y: y,
-//     Width: playerWidth,
-//     xUpper: WIDTH - playerWidth,
-//     xLower: 0,
-//     isPlayer: isPlayer
-//   }
-// }
+const player = createPlayer(250, 950, 50, 50, CHARTREUSE, true)
 
 function keyPresslistener (event) {
   if (event.key === 'ArrowRight') {
@@ -61,8 +50,6 @@ function clearScreen () {
   context.clearRect(0, 0, WIDTH, HEIGHT)
 }
 
-createPlayer(250, 950, 50, 50, true)
-
 function drawPlayer (x, y, width, height, color) {
   const ctx = getContext()
 
@@ -80,4 +67,5 @@ function drawFrame () {
 
 window.addEventListener('keydown', keyPresslistener)
 
-const animationID = window.setInterval(drawFrame, 50)
+document.querySelector('#start-button').addEventListener('click', animationID => window.setInterval(drawFrame, 20))
+document.querySelector('#stop-button').addEventListener('click', () => window.clearInterval(animationID))
