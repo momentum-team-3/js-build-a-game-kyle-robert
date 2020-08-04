@@ -3,15 +3,10 @@
   margin: 0px;
   border: 0px;
 }
-body {
-  overflow: hidden;
-}
-main > * {
-  flex: 0 0 auto;
-}
 
-#canvas {
-  background-color: rgb(73, 12, 12);
+.container {
+  flex: 0 0 auto;
+  overflow: hidden;
 }
 
 main {
@@ -21,4 +16,12 @@ main {
   align-content: center;
   justify-content: center;
   justify-items: center;
+}
+
+main > * {
+  flex: 0 0 auto;
+}
+
+#canvas {
+  background-color: rgb(73, 12, 12);
 }
