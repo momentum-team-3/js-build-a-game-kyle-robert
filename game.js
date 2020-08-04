@@ -2,7 +2,6 @@
 // The document's canvas element
 const canv = document.querySelector('#canvas')
 // small helper for getting a new context
-const getctx = () => canv.getContext('2d')
 document.body.appendChild(canv)
 const HEIGHT = canv.height
 const WIDTH = canv.width
@@ -53,7 +52,7 @@ function keyPresslistener (event) {
 
 // get a new 2d drawing context
 function getContext () {
-  return canv.getContext('2d')
+  return canv.getContext("2d")
 }
 
 function clearScreen () {
@@ -80,4 +79,4 @@ function drawFrame () {
 
 window.addEventListener('keydown', keyPresslistener)
 
-const animationID = window.setInterval(drawFrame, 50)
+let animationID = window.setInterval(drawFrame, 50)
