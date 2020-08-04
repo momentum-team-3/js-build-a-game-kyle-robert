@@ -42,7 +42,7 @@ function keyPresslistener (event) {
 
 // get a new 2d drawing context
 function getContext () {
-  return canv.getContext('2d')
+  return canv.getContext("2d")
 }
 
 function clearScreen () {
@@ -67,5 +67,11 @@ function drawFrame () {
 
 window.addEventListener('keydown', keyPresslistener)
 
+<<<<<<< HEAD
 document.querySelector('#start-button').addEventListener('click', animationID => window.setInterval(drawFrame, 20))
 document.querySelector('#stop-button').addEventListener('click', () => window.clearInterval(animationID))
+=======
+document.querySelector("#start-button").addEventListener("click", () => animationID = window.setInterval(drawFrame,20))
+
+let animationID = window.setInterval(drawFrame, 50)
+>>>>>>> dd6e41a08ceaa2d9b439b804a4cc607602c165a7
