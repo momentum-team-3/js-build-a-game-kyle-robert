@@ -42,6 +42,10 @@ h1 {
 
 
 #canvas {
+<<<<<<< HEAD
+  background-image: url(/Images/nebula09.png);
+=======
   background-image: url(PixelSpaceRage/PixelBackgroundSeamlessVertically.png);
+>>>>>>> aee8e10c9e5cd49052acdc9ac1909f3adef14598
 }
 

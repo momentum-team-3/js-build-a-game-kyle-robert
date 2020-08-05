@@ -1,13 +1,21 @@
 // Global constants and variables
 // The document's canvas element
 const canv = document.querySelector('#canvas')
+
 // small helper for getting a new context
 document.body.appendChild(canv)
 const HEIGHT = canv.height
 const WIDTH = canv.width
 const CHARTREUSE = 'rgb(127,255,0)'
 let animationID
+var playerImg = new Image()
+playerImg.addEventListener('load', () => playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png')
 var playerAlive = true
+
+function drawPlayerImage (x, y, xScale, yScale, image) {
+  const ctx = getContext()
+  ctx.drawImage(image, x, y, xScale, yScale)
+}
 
 function createPlayer (x, y, height, width, color, isPlayer) {
   return {
@@ -50,19 +58,18 @@ function clearScreen () {
   context.clearRect(0, 0, WIDTH, HEIGHT)
 }
 
-function drawPlayer (x, y, width, height, color) {
-  const ctx = getContext()
+// function drawImage (x, y, width, height, playerImg) {
+//   const ctx = getContext()
 
-  ctx.fillStyle = color
-  ctx.fillRect(x, y, width, height)
-}
+//   ctx.fillRect(x, y, width, height)
+// }
 
 function drawFrame () {
   clearScreen()
   // if (areColliding(player, badguy)) {
   //   console.log('Oh no, an emergency!')
   // }
-  drawPlayer(player.X, player.Y, player.Width, player.Height, player.color)
+  drawPlayerImage(player.X, player.Y, player.Width, player.Height, playerImg)
 }
 
 window.addEventListener('keydown', keyPresslistener)
