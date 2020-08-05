@@ -10,6 +10,10 @@ let animationID
 const blasterVelocity = [0, 3]
 const playerBlaster = new Image()
 const playerImg = new Image()
+const redEnemyImg = new Image()
+const greenEnemyImg = new Image()
+greenEnemyImg.src = 'Images/Space_rage128px/green_enemy.png'
+redEnemyImg.src = 'Images/Space_rage128px/red_enemy.png'
 playerBlaster.src = 'Images/Space_rage128px/Blaster_plasma_purple.png'
 playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png'
 var playerAlive = true
