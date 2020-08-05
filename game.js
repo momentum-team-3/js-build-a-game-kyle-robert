@@ -8,7 +8,7 @@ const HEIGHT = canv.height
 const WIDTH = canv.width
 const CHARTREUSE = 'rgb(127,255,0)'
 let animationID
-const playerImg = new Image()
+let playerImg = new Image()
 playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png'
 var playerAlive = true
 const baseImageSize = 128 // 128 px
@@ -94,5 +94,5 @@ function drawFrame() {
 
 window.addEventListener('keydown', keyPresslistener)
 
-document.querySelector('#start-button').addEventListener('click', animationID => window.setInterval(drawFrame, 20))
+document.querySelector('#start-button').addEventListener('click', () => animationID = window.setInterval(drawFrame, 20))
 document.querySelector('#stop-button').addEventListener('click', () => window.clearInterval(animationID))
