@@ -3,7 +3,8 @@
   margin: 0px;
   border: 0px;
 }
-body {padding-left: 0;
+body {
+  padding-left: 0;
   padding-right: 0;
   margin-left: auto;
   margin-right: auto;
@@ -67,5 +68,3 @@ body {
   background-size: 58px 58px;
   background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
 }
-
-

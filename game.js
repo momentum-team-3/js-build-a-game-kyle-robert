@@ -8,52 +8,67 @@ const HEIGHT = canv.height
 const WIDTH = canv.width
 const CHARTREUSE = 'rgb(127,255,0)'
 let animationID
-var playerImg = new Image()
-playerImg.addEventListener('load', () => playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png')
+const playerImg = new Image()
+playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png'
 var playerAlive = true
+const baseImageSize = 128 // 128 px
+const scale = 0.25 // scale image to 32 px
 
-function drawPlayerImage (x, y, xScale, yScale, image) {
-  const ctx = getContext()
-  ctx.drawImage(image, x, y, xScale, yScale)
-}
 
-function createPlayer (x, y, height, width, color, isPlayer) {
-  return {
-    X: x,
-    Y: y,
-    Height: height,
-    Width: width,
-    xUpper: WIDTH - width,
-    yUpper: HEIGHT - height,
-    xLower: 0,
-    yLower: 0,
-    color: color,
-    isPlayer: isPlayer
+
+function makeShip(x, y, image, isPlayer) {
+  const ship = {
+    x: x,
+    y: y,
+    image: image,
+    isPlayer: isPlayer,
+    radius: () => Math.floor(ship.scale / 2)
   }
+  return ship
 }
 
-const player = createPlayer(250, 950, 50, 50, CHARTREUSE, true)
 
-function keyPresslistener (event) {
+
+function createPlayer(x, y, isPlayer) {
+  var playerShip = makeShip(
+    x,
+    y,
+    isPlayer)
+
+  playerShip.playerImg = playerImg
+  playerShip.numLives = 3
+  playerShip.height = baseImageSize * scale
+  playerShip.width = baseImageSize * scale
+  playerShip.xUpper = WIDTH - playerShip.width
+  playerShip.yUpper = HEIGHT - playerShip.height
+  playerShip.xLower = 0
+  playerShip.yLower = 0
+
+  return playerShip
+}
+
+var player = createPlayer(250, 950, true)
+
+function keyPresslistener(event) {
   if (event.key === 'ArrowRight') {
-    player.X += 10
+    player.x += 10
   } else if (event.key === 'ArrowLeft') {
-    player.X -= 10
+    player.x -= 10
   }
-  if (player.X > player.xUpper) {
-    player.X = player.xLower
+  if (player.x > player.xUpper) {
+    player.x = player.xLower
   }
-  if (player.X < player.xLower) {
-    player.X = player.xUpper
+  if (player.x < player.xLower) {
+    player.x = player.xUpper
   }
 }
 
 // get a new 2d drawing context
-function getContext () {
+function getContext() {
   return canv.getContext('2d')
 }
 
-function clearScreen () {
+function clearScreen() {
   const context = getContext()
   context.clearRect(0, 0, WIDTH, HEIGHT)
 }
@@ -64,12 +79,17 @@ function clearScreen () {
 //   ctx.fillRect(x, y, width, height)
 // }
 
-function drawFrame () {
+function drawPlayerImage(image, x, y) {
+  const ctx = getContext()
+  ctx.drawImage(image, x, y)
+}
+
+function drawFrame() {
   clearScreen()
   // if (areColliding(player, badguy)) {
   //   console.log('Oh no, an emergency!')
   // }
-  drawPlayerImage(player.X, player.Y, player.Width, player.Height, playerImg)
+  drawPlayerImage(player.playerImg, player.x, player.y)
 }
 
 window.addEventListener('keydown', keyPresslistener)
