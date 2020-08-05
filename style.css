@@ -32,6 +32,10 @@ main > * {
   flex: 0 0 auto;
 }
 
+h1 {
+  color: blueviolet;
+}
+
 #canvas {
   background-image: url(PixelSpaceRage/PixelBackgroundSeamlessVertically.png);
 }
