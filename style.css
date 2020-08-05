@@ -35,7 +35,12 @@ main > * {
 
 h1 {
   color: blueviolet;
+  font-family: Impact;
+  align-content: center;
+  position: relative;
+  font-weight: bolder;
 }
+
 
 #canvas {
   background-image: url(PixelSpaceRage/PixelBackgroundSeamlessVertically.png);
