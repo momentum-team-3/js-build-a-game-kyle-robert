@@ -7,7 +7,9 @@ document.body.appendChild(canv)
 const HEIGHT = canv.height
 const WIDTH = canv.width
 let animationID
+const playerBlaster = new Image()
 const playerImg = new Image()
+playerBlaster.src = 'Images/Space_rage128px/Blaster_plasma_purple.png'
 playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png'
 var playerAlive = true
 const baseImageSize = 128 // 128 px
@@ -17,20 +19,21 @@ function makeShip (x, y, image, isPlayer) {
   const ship = {
     x: x,
     y: y,
-    image: image,
+    playerImg: image,
     isPlayer: isPlayer,
     radius: () => Math.floor((baseImageSize * scale) / 2)
   }
   return ship
 }
 
-function createPlayer (x, y, isPlayer) {
+function createPlayer (x, y, image, isPlayer) {
   var playerShip = makeShip(
     x,
     y,
+    playerImg,
     isPlayer)
 
-  playerShip.playerImg = playerImg
+  // playerShip.playerImg = playerImg
   playerShip.numLives = 3
   playerShip.height = baseImageSize * scale
   playerShip.width = baseImageSize * scale
@@ -42,7 +45,7 @@ function createPlayer (x, y, isPlayer) {
   return playerShip
 }
 
-var player = createPlayer(250, 575, true)
+var player = createPlayer(250, 575, playerImg, true)
 
 function keyPresslistener (event) {
   if (event.key === 'ArrowRight') {
