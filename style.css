@@ -57,8 +57,6 @@ footer {
 #canvas {
   background-image: url(PixelSpaceRage/PixelBackgroundSeamlessVertically.png);
 }
-<<<<<<< HEAD
-=======
 
 /* Background Image behind the Canvas */
 body {
@@ -70,6 +68,3 @@ body {
   background-size: 58px 58px;
   background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
 }
-
-
->>>>>>> fab433d28aa7eb673a2cfb753160a6531fb22963
