@@ -8,8 +8,8 @@ const HEIGHT = canv.height
 const WIDTH = canv.width
 const CHARTREUSE = 'rgb(127,255,0)'
 let animationID
-var playerImg = new Image()
-playerImg.addEventListener('load', () => playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png')
+const playerImg = new Image()
+playerImg.src('Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png')
 var playerAlive = true
 
 function drawPlayerImage (x, y, xScale, yScale, image) {

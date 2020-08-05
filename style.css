@@ -10,6 +10,7 @@ body {
   margin-right: auto;
   display: block;
   width: 800px;
+  align-self: center;
 }
 
 .container {
@@ -32,16 +33,43 @@ main {
 main > * {
   flex: 0 0 auto;
 }
-
+/* Title and Buttons and Footer */
 h1 {
   color: blueviolet;
   font-family: Impact;
   align-content: center;
   position: relative;
   font-weight: bolder;
+  border-radius: 2px;
+  border-color: darkolivegreen;
 }
-
+button {
+  display: flex;
+  display: inline;
+  size: 30px;
+  background-color: cyan;
+}
+footer {
+  color: white;
+  size: bold;
+}
 
 #canvas {
   background-image: url(PixelSpaceRage/PixelBackgroundSeamlessVertically.png);
 }
+<<<<<<< HEAD
+=======
+
+/* Background Image behind the Canvas */
+body {
+  background-color: #141114;
+  background-image: linear-gradient(335deg, black 23px, transparent 23px),
+    linear-gradient(155deg, black 23px, transparent 23px),
+    linear-gradient(335deg, black 23px, transparent 23px),
+    linear-gradient(155deg, black 23px, transparent 23px);
+  background-size: 58px 58px;
+  background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+}
+
+
+>>>>>>> fab433d28aa7eb673a2cfb753160a6531fb22963
