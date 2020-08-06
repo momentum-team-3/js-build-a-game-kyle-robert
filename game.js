@@ -19,6 +19,7 @@ playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png'
 var playerAlive = true
 const baseImageSize = 128 // 128 px
 var blaster
+let i
 
 function randomInteger (min, max) {
   if (min === max) {
@@ -55,6 +56,10 @@ class Enemies {
     this.velocity = [randomInteger(-1.75, 1.75), randomInteger(-1.75, 1.75)]
     this.enemyImg = greenEnemyImg
     this.isPlayer = false
+  }
+
+  removeFromArray (array) {
+    array.splice(array.indexOf(this), 1)
   }
 }
 
@@ -184,15 +189,13 @@ function updateEnemies () {
   }
 }
 
-function isColliding () {
-  enemyList.forEach(function (enemy) {
-    if (((enemy.x < blaster.x + blaster.width) && (enemy.x + enemy.width) > blaster.x) && ((enemy.y < blaster.y + blaster.height) && (enemy.y + enemy.height) > blaster.y)) {
-      enemy.isAlive = false
-      return true
-    } else {
-      return false
-    }
-  })
+function isColliding (enemy, blaster) {
+  if (((enemy.x < blaster.x + blaster.width) && (enemy.x + enemy.width) > blaster.x) && ((enemy.y < blaster.y + blaster.height) && (enemy.y + enemy.height) > blaster.y)) {
+    enemy.isAlive = false
+    return true
+  } else {
+    return false
+  }
 }
 
 // get a new 2d drawing context
@@ -212,17 +215,12 @@ function drawImage (image, x, y) {
 
 function drawFrame () {
   clearScreen()
-  // if (isColliding) {
-
-  // }
-
   drawImage(player.playerImg, player.x, player.y)
   drawImage(e1.enemyImg, e1.x, e1.y)
   drawImage(e2.enemyImg, e2.x, e2.y)
   drawImage(e3.enemyImg, e3.x, e3.y)
   drawImage(e4.enemyImg, e4.x, e4.y)
   drawImage(e5.enemyImg, e5.x, e5.y)
-  updateEnemies()
   e1.x += e1.velocity[0]
   e1.y += e1.velocity[1]
   e2.x += e2.velocity[0]
@@ -233,9 +231,22 @@ function drawFrame () {
   e4.y += e4.velocity[1]
   e5.x += e5.velocity[0]
   e5.y += e5.velocity[1]
-  drawImage(blaster.blasterImg, blaster.x, blaster.y)
-  blaster.x += blaster.velocity[0]
-  blaster.y += blaster.velocity[1]
+  updateEnemies()
+  if (blaster) {
+    drawImage(blaster.blasterImg, blaster.x, blaster.y)
+    blaster.x += blaster.velocity[0]
+    blaster.y += blaster.velocity[1]
+    for (let i = 0; i < enemyList.length; i++) {
+      if (isColliding(enemyList[i], blaster)) {
+        enemyList[i].removeFromArray(enemyList)
+        // } else {
+        //   drawImage(enemyList[i].enemyImg, enemyList[i].x, enemyList[i].y)
+        //   enemyList[i].x = enemyList[i].velocity[0]
+        //   enemyList[i].y = enemyList[i].velocity[1]
+        // }
+      }
+    }
+  }
 }
 
 if (!playerAlive) {
