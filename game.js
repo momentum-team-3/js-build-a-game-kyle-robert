@@ -31,7 +31,15 @@ class PlayerBlaster {
     return this
   }
 }
-
+class Enemies {
+  constructor (x, y,) {
+    this.x = x
+    this.y = y
+    this.Enemyimg = greenEnemyImg
+    this.isPlayer = false
+    return this
+  }
+}
 function makeShip (x, y, image, isPlayer) {
   const ship = {
     x: x,
