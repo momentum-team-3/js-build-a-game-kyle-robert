@@ -212,9 +212,9 @@ function drawImage (image, x, y) {
 
 function drawFrame () {
   clearScreen()
-  if (isColliding) {
+  // if (isColliding) {
 
-  }
+  // }
 
   drawImage(player.playerImg, player.x, player.y)
   drawImage(e1.enemyImg, e1.x, e1.y)
