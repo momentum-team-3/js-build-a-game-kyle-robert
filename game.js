@@ -7,7 +7,7 @@ document.body.appendChild(canv)
 const HEIGHT = canv.height
 const WIDTH = canv.width
 let animationID
-const blasterVelocity = [0, -2]
+const blasterVelocity = [0, -4]
 const playerBlasterImg = new Image()
 const playerImg = new Image()
 const redEnemyImg = new Image()
@@ -33,8 +33,10 @@ class PlayerBlaster {
   constructor (x, y) {
     this.x = x
     this.y = y
+    this.width = 9 // 9 px
+    this.height = 26 // 26 px
     this.velocity = blasterVelocity
-    this.numLives = 1
+    this.isAlive = true
     this.blasterImg = playerBlasterImg
     this.isPlayer = false
   }
@@ -43,10 +45,13 @@ class Enemies {
   constructor (x, y) {
     this.x = x
     this.y = y
+    this.width = 64 // 64 px
+    this.height = 64 // 64 px
     this.xMin = 0
     this.xMax = 440
     this.yMin = 0
     this.yMax = 220
+    this.isAlive = true
     this.velocity = [randomInteger(-1.75, 1.75), randomInteger(-1.75, 1.75)]
     this.enemyImg = greenEnemyImg
     this.isPlayer = false
@@ -72,8 +77,8 @@ function createPlayer (x, y, image, isPlayer) {
     isPlayer)
 
   playerShip.numLives = 3
-  playerShip.height = baseImageSize
-  playerShip.width = baseImageSize
+  playerShip.height = 64 // 64 px
+  playerShip.width = 64 // 64 px
   playerShip.xUpper = WIDTH - playerShip.width
   playerShip.yUpper = HEIGHT - playerShip.height
   playerShip.xLower = 0
@@ -88,6 +93,7 @@ var e2 = new Enemies(125, 0)
 var e3 = new Enemies(225, 0)
 var e4 = new Enemies(325, 0)
 var e5 = new Enemies(425, 0)
+const enemyList = [e1, e2, e3, e4, e5]
 
 function keyPresslistener (event) {
   if (event.key === 'ArrowRight') {
@@ -178,6 +184,17 @@ function updateEnemies () {
   }
 }
 
+function isColliding () {
+  enemyList.forEach(function (enemy) {
+    if (((enemy.x < blaster.x + blaster.width) && (enemy.x + enemy.width) > blaster.x) && ((enemy.y < blaster.y + blaster.height) && (enemy.y + enemy.height) > blaster.y)) {
+      enemy.isAlive = false
+      return true
+    } else {
+      return false
+    }
+  })
+}
+
 // get a new 2d drawing context
 function getContext () {
   return canv.getContext('2d')
@@ -195,10 +212,10 @@ function drawImage (image, x, y) {
 
 function drawFrame () {
   clearScreen()
+  if (isColliding) {
 
-  // if (areColliding(player, badguy)) {
-  //   console.log('Oh no, an emergency!')
-  // }
+  }
+
   drawImage(player.playerImg, player.x, player.y)
   drawImage(e1.enemyImg, e1.x, e1.y)
   drawImage(e2.enemyImg, e2.x, e2.y)
