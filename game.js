@@ -16,6 +16,7 @@ greenEnemyImg.src = 'Images/Space_rage128px/green_enemy.png'
 redEnemyImg.src = 'Images/Space_rage128px/red_enemy.png'
 playerBlasterImg.src = 'Images/Space_rage128px/Blaster_plasma_purple.png'
 playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png'
+const enemyImgs = [new Image()]
 var playerAlive = true
 const baseImageSize = 128 // 128 px
 var blaster
@@ -32,10 +33,10 @@ class PlayerBlaster {
   }
 }
 class Enemies {
-  constructor (x, y,) {
+  constructor (x, y) {
     this.x = x
     this.y = y
-    this.Enemyimg = greenEnemyImg
+    this.enemyImg = greenEnemyImg
     this.isPlayer = false
     return this
   }
@@ -58,7 +59,6 @@ function createPlayer (x, y, image, isPlayer) {
     image,
     isPlayer)
 
-  // playerShip.playerImg = playerImg
   playerShip.numLives = 3
   playerShip.height = baseImageSize
   playerShip.width = baseImageSize
@@ -71,6 +71,11 @@ function createPlayer (x, y, image, isPlayer) {
 }
 
 var player = createPlayer(250, 575, playerImg, true)
+var e1 = new Enemies(25, 0)
+var e2 = new Enemies(125, 0)
+var e3 = new Enemies(225, 0)
+var e4 = new Enemies(325, 0)
+var e5 = new Enemies(425, 0)
 
 function keyPresslistener (event) {
   if (event.key === 'ArrowRight') {
@@ -109,6 +114,11 @@ function drawFrame () {
   //   console.log('Oh no, an emergency!')
   // }
   drawImage(player.playerImg, player.x, player.y)
+  drawImage(e1.enemyImg, e1.x, e1.y)
+  drawImage(e2.enemyImg, e2.x, e2.y)
+  drawImage(e3.enemyImg, e3.x, e3.y)
+  drawImage(e4.enemyImg, e4.x, e4.y)
+  drawImage(e5.enemyImg, e5.x, e5.y)
   drawImage(blaster.blasterImg, blaster.x, blaster.y)
   if (blaster) {
     blaster.x += blaster.velocity[0]
