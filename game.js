@@ -21,6 +21,7 @@ const baseImageSize = 128 // 128 px
 var blaster
 const score = 0
 
+// create random integers for our velocity function
 function randomInteger (min, max) {
   if (min === max) {
     min = max - 1
@@ -30,6 +31,7 @@ function randomInteger (min, max) {
   return min + randInt
 }
 
+// the Player's blaster class
 class PlayerBlaster {
   constructor (x, y) {
     this.x = x
@@ -42,6 +44,8 @@ class PlayerBlaster {
     this.isPlayer = false
   }
 }
+
+// Enemy class
 class Enemies {
   constructor (x, y) {
     this.x = x
@@ -63,6 +67,7 @@ class Enemies {
   }
 }
 
+// ship object, not really needed.
 function makeShip (x, y, image, isPlayer) {
   const ship = {
     x: x,
@@ -74,6 +79,7 @@ function makeShip (x, y, image, isPlayer) {
   return ship
 }
 
+// creat player object
 function createPlayer (x, y, image, isPlayer) {
   var playerShip = makeShip(
     x,
@@ -92,6 +98,7 @@ function createPlayer (x, y, image, isPlayer) {
   return playerShip
 }
 
+// create player and enemies
 var player = createPlayer(250, 575, playerImg, true)
 var e1 = new Enemies(25, 0)
 var e2 = new Enemies(125, 0)
@@ -100,6 +107,7 @@ var e4 = new Enemies(325, 0)
 var e5 = new Enemies(425, 0)
 const enemyList = [e1, e2, e3, e4, e5]
 
+// event listeners
 function keyPresslistener (event) {
   if (event.key === 'ArrowRight') {
     player.x += 10
@@ -116,6 +124,7 @@ function keyPresslistener (event) {
   }
 }
 
+// element wise enemy array update
 function updateEnemy (enemy) {
   enemy.x += enemy.velocity[0]
   enemy.y += enemy.velocity[1]
@@ -137,6 +146,7 @@ function updateEnemy (enemy) {
   }
 }
 
+// test for collisions
 function isColliding (enemy, blaster) {
   if (((enemy.x < blaster.x + blaster.width) && (enemy.x + enemy.width) > blaster.x) && ((enemy.y < blaster.y + blaster.height) && (enemy.y + enemy.height) > blaster.y)) {
     enemy.isAlive = false
@@ -151,16 +161,19 @@ function getContext () {
   return canv.getContext('2d')
 }
 
+// clear screen
 function clearScreen () {
   const context = getContext()
   context.clearRect(0, 0, WIDTH, HEIGHT)
 }
 
+// draw each Image function
 function drawImage (image, x, y) {
   const ctx = getContext()
   ctx.drawImage(image, x, y)
 }
 
+// draw Score on canvas
 function drawScore () {
   const ctx = getContext()
   ctx.font = '15px Serif'
@@ -168,6 +181,7 @@ function drawScore () {
   ctx.fillText('Score: ' + score, 10, 15)
 }
 
+// refresh frame
 function drawFrame () {
   clearScreen()
   drawScore()
