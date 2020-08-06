@@ -16,10 +16,18 @@ greenEnemyImg.src = 'Images/Space_rage128px/green_enemy.png'
 redEnemyImg.src = 'Images/Space_rage128px/red_enemy.png'
 playerBlasterImg.src = 'Images/Space_rage128px/Blaster_plasma_purple.png'
 playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png'
-const enemyImgs = [new Image()]
 var playerAlive = true
 const baseImageSize = 128 // 128 px
 var blaster
+
+function randomInteger (min, max) {
+  if (min === max) {
+    min = max - 1
+  }
+  const range = max - min + 1
+  const randInt = Math.ceil(Math.random() * range)
+  return min + randInt
+}
 
 class PlayerBlaster {
   constructor (x, y) {
@@ -36,6 +44,11 @@ class Enemies {
   constructor (x, y) {
     this.x = x
     this.y = y
+    this.xMin = 0
+    this.xMax = 440
+    this.yMin = 0
+    this.yMax = 220
+    this.velocity = [randomInteger(-1.75, 1.75), randomInteger(-1.75, 1.75)]
     this.enemyImg = greenEnemyImg
     this.isPlayer = false
     return this
@@ -85,11 +98,84 @@ function keyPresslistener (event) {
   } else if (event.key === ' ') {
     blaster = new PlayerBlaster(player.x, player.y)
   }
-  if (player.x > player.xUpper) {
+  if (player.x > 440) {
     player.x = player.xLower
   }
   if (player.x < player.xLower) {
-    player.x = player.xUpper
+    player.x = 440
+  }
+}
+
+function updateEnemies () {
+  if (e1.x > e1.xMax) {
+    e1.x = e1.xMax
+    e1.velocity[0] *= -1
+  } else if (e1.x < e1.xMin) {
+    e1.x = e1.xMin
+    e1.velocity[0] *= -1
+  }
+  if (e1.y > e1.yMax) {
+    e1.y = e1.yMax
+    e1.velocity[1] *= -1
+  } else if (e1.y < e1.yMin) {
+    e1.y = e1.yMin
+    e1.velocity[1] *= -1
+  }
+  if (e2.x > e2.xMax) {
+    e2.x = e2.xMax
+    e2.velocity[0] *= -1
+  } else if (e2.x < e2.xMin) {
+    e2.x = e2.xMin
+    e2.velocity[0] *= -1
+  }
+  if (e2.y > e2.yMax) {
+    e2.y = e2.yMax
+    e2.velocity[1] *= -1
+  } else if (e2.y < e2.yMin) {
+    e2.y = e2.yMin
+    e2.velocity[1] *= -1
+  }
+  if (e3.x > e3.xMax) {
+    e3.x = e3.xMax
+    e3.velocity[0] *= -1
+  } else if (e3.x < e3.xMin) {
+    e3.x = e3.xMin
+    e3.velocity[0] *= -1
+  }
+  if (e3.y > e3.yMax) {
+    e3.y = e3.yMax
+    e3.velocity[1] *= -1
+  } else if (e3.y < e3.yMin) {
+    e3.y = e3.yMin
+    e3.velocity[1] *= -1
+  }
+  if (e4.x > e4.xMax) {
+    e4.x = e4.xMax
+    e4.velocity[0] *= -1
+  } else if (e4.x < e4.xMin) {
+    e4.x = e4.xMin
+    e4.velocity[0] *= -1
+  }
+  if (e4.y > e4.yMax) {
+    e4.y = e4.yMax
+    e4.velocity[1] *= -1
+  } else if (e4.y < e4.yMin) {
+    e4.y = e4.yMin
+    e4.velocity[1] *= -1
+  }
+  if (e5.x > e5.xMax) {
+    e5.x = e5.xMax
+    e5.velocity[0] *= -1
+  } else if (e5.x < e5.xMin) {
+    e5.x = e5.xMin
+    e5.velocity[0] *= -1
+  }
+  if (e5.y > e5.yMax) {
+    e5.y = e5.yMax
+    e5.velocity[1] *= -1
+  } else if (e5.y < e5.yMin) {
+    e5.y = e5.yMin
+    e5.velocity[1] *= -1
   }
 }
 
@@ -110,6 +196,7 @@ function drawImage (image, x, y) {
 
 function drawFrame () {
   clearScreen()
+
   // if (areColliding(player, badguy)) {
   //   console.log('Oh no, an emergency!')
   // }
@@ -119,11 +206,20 @@ function drawFrame () {
   drawImage(e3.enemyImg, e3.x, e3.y)
   drawImage(e4.enemyImg, e4.x, e4.y)
   drawImage(e5.enemyImg, e5.x, e5.y)
+  updateEnemies()
+  e1.x += e1.velocity[0]
+  e1.y += e1.velocity[1]
+  e2.x += e2.velocity[0]
+  e2.y += e2.velocity[1]
+  e3.x += e3.velocity[0]
+  e3.y += e3.velocity[1]
+  e4.x += e4.velocity[0]
+  e4.y += e4.velocity[1]
+  e5.x += e5.velocity[0]
+  e5.y += e5.velocity[1]
   drawImage(blaster.blasterImg, blaster.x, blaster.y)
-  if (blaster) {
-    blaster.x += blaster.velocity[0]
-    blaster.y += blaster.velocity[1]
-  }
+  blaster.x += blaster.velocity[0]
+  blaster.y += blaster.velocity[1]
 }
 
 // if (!playerAlive) {
