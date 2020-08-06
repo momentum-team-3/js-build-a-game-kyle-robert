@@ -19,6 +19,7 @@ playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png'
 var playerAlive = true
 const baseImageSize = 128 // 128 px
 var blaster
+const Score = 0
 
 function randomInteger (min, max) {
   if (min === max) {
@@ -49,7 +50,7 @@ class Enemies {
     this.height = 64 // 64 px
     this.xMin = 0
     this.xMax = 440
-    this.yMin = 0
+    this.yMin = 20
     this.yMax = 220
     this.isAlive = true
     this.velocity = [randomInteger(-1.75, 1.75), randomInteger(-1.75, 1.75)]
@@ -210,12 +211,18 @@ function drawImage (image, x, y) {
   ctx.drawImage(image, x, y)
 }
 
+function drawScore () {   
+  const ctx = getContext()   
+  ctx.font = "15px Serif";
+  ctx.fillStyle = "rgb(255, 0, 0";
+  ctx.fillText("Score: "+score, 10, 15); }  
+
 function drawFrame () {
   clearScreen()
   // if (isColliding) {
 
   // }
-
+  drawScore()
   drawImage(player.playerImg, player.x, player.y)
   drawImage(e1.enemyImg, e1.x, e1.y)
   drawImage(e2.enemyImg, e2.x, e2.y)
