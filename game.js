@@ -37,7 +37,6 @@ class PlayerBlaster {
     this.numLives = 1
     this.blasterImg = playerBlasterImg
     this.isPlayer = false
-    return this
   }
 }
 class Enemies {
@@ -51,9 +50,9 @@ class Enemies {
     this.velocity = [randomInteger(-1.75, 1.75), randomInteger(-1.75, 1.75)]
     this.enemyImg = greenEnemyImg
     this.isPlayer = false
-    return this
   }
 }
+
 function makeShip (x, y, image, isPlayer) {
   const ship = {
     x: x,
@@ -222,10 +221,10 @@ function drawFrame () {
   blaster.y += blaster.velocity[1]
 }
 
-// if (!playerAlive) {
-//   alert('Game over!')
-//   window.clearInterval(animationID)
-// }
+if (!playerAlive) {
+  alert('Game over!')
+  window.clearInterval(animationID)
+}
 
 window.addEventListener('keydown', keyPresslistener)
 
