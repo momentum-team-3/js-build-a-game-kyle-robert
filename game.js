@@ -19,6 +19,13 @@ playerImg.src = 'Images/Space_rage128px/PlayerRed_Frame_01_png_processed.png'
 var playerAlive = true
 const baseImageSize = 128 // 128 px
 
+class Blaster {
+  constructor (x, y) {
+    this.x = x
+    this.y = y
+  }
+}
+
 function makeBlaster (x, y) {
   const blaster = {
     x: x,
@@ -59,6 +66,7 @@ function createPlayer (x, y, image, isPlayer) {
   playerShip.yLower = 0
 
   playerShip.blaster = makeBlaster(playerShip.x, playerShip.y)
+
   return playerShip
 }
 
@@ -78,7 +86,7 @@ function keyPresslistener (event) {
     player.x += 10
   } else if (event.key === 'ArrowLeft') {
     player.x -= 10
-  } else if (event.key === 'ArrowUp') {
+  } else if (event.key === ' ') {
     fireBlaster()
   }
   if (player.x > player.xUpper) {
