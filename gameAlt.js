@@ -132,8 +132,8 @@ function updateEnemy (enemy) {
     enemy.y = enemy.yMax
     enemy.velocity[1] *= -1
   } else if (enemy.y < enemy.yMin) {
-    enemy.y = enemy.yMin
-    enemy.velocity[1] *= -1
+    enemy.y = enemy.xMin
+    e1.velocity[1] *= -1
   }
 }
 
@@ -170,29 +170,30 @@ function drawScore () {
 
 function drawFrame () {
   clearScreen()
+
   drawScore()
   drawImage(player.playerImg, player.x, player.y)
-  if (playerAlive) {
+
+  if (blaster) {
+    drawImage(blaster.blasterImg, blaster.x, blaster.y)
+    blaster.x += blaster.velocity[0]
+    blaster.y += blaster.velocity[1]
     for (let i = 0; i < enemyList.length; i++) {
-      drawImage(enemyList[i].enemyImg, enemyList[i].x, enemyList[i].y)
-      updateEnemy(enemyList[i])
-      if (blaster) {
-        drawImage(blaster.blasterImg, blaster.x, blaster.y)
-        blaster.x += blaster.velocity[0]
-        blaster.y += blaster.velocity[1]
-        if (isColliding(enemyList[i], blaster)) {
-          enemyList[i].removeFromArray(enemyList)
-        } else {
-          if (enemyList[i]) {
-            updateEnemy(enemyList[i])
-          }
+      if (isColliding(enemyList[i], blaster)) {
+        enemyList[i].removeFromArray(enemyList)
+      } else {
+        if (enemyList[i]) {
+          updateEnemy(enemyList[i])
+          drawImage(enemyList[i].enemyImg, enemyList[i].x, enemyList[i].y)
         }
       }
     }
-  } else {
-    alert('Game over!')
-    window.clearInterval(animationID)
   }
+}
+
+if (!playerAlive) {
+  alert('Game over!')
+  window.clearInterval(animationID)
 }
 
 window.addEventListener('keydown', keyPresslistener)
